@@ -1,4 +1,4 @@
-from common import read
+from common import read, parse_coords
 
 DAY = 8
 
@@ -25,14 +25,6 @@ example = """162,817,812
 
 input = read(DAY)
 
-# return list of coords as tuples
-def parse(input):
-    result = []
-    for line in input.splitlines():
-        result.append(tuple([int(x) for x in line.split(',')]))
-    
-    return result
-
 # return list of (dist, i, j) where dist = the distance (squared) between i and j
 # sorted from least to greatest distance.
 def get_sorted_distances(boxes):
@@ -58,7 +50,7 @@ def build_lookups(l):
     return (circuits, circuits_lookup)
 
 def part_one(input, pairs):
-    boxes = parse(input)
+    boxes = parse_coords(input)
 
     dists = get_sorted_distances(boxes) 
     circuits, circuits_lookup = build_lookups(len(boxes))
@@ -89,7 +81,7 @@ print(part_one(example, 10))
 print(part_one(input, 1000))
 
 def part_two(input):
-    boxes = parse(input)
+    boxes = parse_coords(input)
 
     dists = get_sorted_distances(boxes) 
 
